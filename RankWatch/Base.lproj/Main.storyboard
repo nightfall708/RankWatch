@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="RankWatch" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,11 +16,67 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="App name on App Store" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Unv-ne-j9Q">
+                                <rect key="frame" x="178" y="98" width="245" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="245" id="k5T-Z4-o3r"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ct4-Fy-qNy">
+                                <rect key="frame" x="254" y="42" width="92" height="21"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rank Watch" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XFP-SA-WU1">
+                                        <rect key="frame" x="0.0" y="0.0" width="92" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nDY-Qd-yTm">
+                                <rect key="frame" x="534" y="38" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="ztD-wR-Cxw"/>
+                                </constraints>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="save:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Jhh-tg-WkF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="80Q-DX-f95">
+                                <rect key="frame" x="259" y="136.5" width="82" height="30"/>
+                                <state key="normal" title="Set Country"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tS-bW-RDf">
+                                <rect key="frame" x="255" y="174" width="90" height="30"/>
+                                <state key="normal" title="Set Category"/>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5tS-bW-RDf" firstAttribute="leading" secondItem="80Q-DX-f95" secondAttribute="trailing" constant="-86" id="9Hz-j5-w0s"/>
+                            <constraint firstItem="80Q-DX-f95" firstAttribute="top" secondItem="Unv-ne-j9Q" secondAttribute="bottom" constant="8" id="QSH-bD-rMS"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="nDY-Qd-yTm" secondAttribute="trailing" id="UZE-1g-fKr"/>
+                            <constraint firstItem="80Q-DX-f95" firstAttribute="centerX" secondItem="Unv-ne-j9Q" secondAttribute="centerX" id="fpn-mb-jju"/>
+                            <constraint firstItem="Unv-ne-j9Q" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hgk-I3-ydh"/>
+                            <constraint firstItem="Unv-ne-j9Q" firstAttribute="top" secondItem="XFP-SA-WU1" secondAttribute="bottom" constant="36" id="kJL-P4-bps"/>
+                            <constraint firstItem="nDY-Qd-yTm" firstAttribute="centerY" secondItem="XFP-SA-WU1" secondAttribute="centerY" id="l9f-7i-Raf"/>
+                            <constraint firstItem="5tS-bW-RDf" firstAttribute="top" secondItem="80Q-DX-f95" secondAttribute="bottom" constant="7.5" id="oGy-SH-BSw"/>
+                            <constraint firstItem="ct4-Fy-qNy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qdG-Xe-tYD"/>
+                            <constraint firstItem="ct4-Fy-qNy" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="22" id="rHo-Db-sMn"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="save" destination="nDY-Qd-yTm" id="5gw-x6-Yv4"/>
+                        <outlet property="textField" destination="Unv-ne-j9Q" id="4ei-5H-RXA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="346" y="220"/>
         </scene>
     </scenes>
 </document>

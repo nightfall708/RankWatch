@@ -34,11 +34,15 @@ class ViewController: UIViewController, WCSessionDelegate {
                 //                if session.watchAppInstalled {
                 //                    if session.watchDirectoryURL != nil {
                 self.savedAppName = textField.text
-                try! session.updateApplicationContext(["appname":textField.text!.lowercaseString])
+                do {
+                    try session.updateApplicationContext(["appname":textField.text!.lowercaseString])
+                    NSUserDefaults.standardUserDefaults().setObject(self.savedAppName, forKey: "appname")
+                    NSUserDefaults.standardUserDefaults().synchronize()
+                    self.save.enabled = false
+                } catch {
+                    
+                }
                 //                        session.transferCurrentComplicationUserInfo(["appname":textField.text!.lowercaseString])
-                NSUserDefaults.standardUserDefaults().setObject(self.savedAppName, forKey: "appname")
-                NSUserDefaults.standardUserDefaults().synchronize()
-                self.save.enabled = false
             } else {
                 // show warning
             }

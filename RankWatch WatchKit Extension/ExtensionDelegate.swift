@@ -38,6 +38,8 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
             NSUserDefaults.standardUserDefaults().setObject(applicationContext[key], forKey: key)
             print("saved \(key) => \(value)")
         }
+        NSUserDefaults.standardUserDefaults().synchronize()
         CLKComplicationServer.sharedInstance().reloadTimelineForComplication(CLKComplicationServer.sharedInstance().activeComplications[0])
+        NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "contextArrived", object: nil))
     }
 }

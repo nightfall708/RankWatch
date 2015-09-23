@@ -16,7 +16,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WCSessionDele
     var responseData: NSData?
     
     func getSupportedTimeTravelDirectionsForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationTimeTravelDirections) -> Void) {
-        handler([.Forward])
+        handler([.None])
     }
     
     func getTimelineStartDateForComplication(complication: CLKComplication, withHandler handler: (NSDate?) -> Void) {
@@ -182,9 +182,10 @@ class RankObject : NSObject {
         let feed = json["feed"]!
         let array = feed!["entry"]!
         var prevRank = NSUserDefaults.standardUserDefaults().integerForKey("prevRank")
+        let appname = NSUserDefaults.standardUserDefaults().stringForKey("appname")
         for (var i = 1; i <= 100; i++) {
             let name = array![i-1]["im:name"]!
-            if (name!["label"]! as? String)?.lowercaseString == NSUserDefaults.standardUserDefaults().stringForKey("appname") {
+            if (name!["label"]! as? String)?.lowercaseString == appname {
                 rank = i;
                 break
             }
@@ -216,6 +217,9 @@ class RankObject : NSObject {
         }
         if !didChange {
             return nil
+        } else {
+            NSUserDefaults.standardUserDefaults().setInteger(Int(rank), forKey: "prevRank")
+            NSUserDefaults.standardUserDefaults().synchronize()
         }
     }
 }

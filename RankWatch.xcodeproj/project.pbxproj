@@ -20,6 +20,7 @@
 		06A5004C1BB3394D006C3AD9 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A5004B1BB3394D006C3AD9 /* ExtensionDelegate.swift */; };
 		06A5004E1BB3394D006C3AD9 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A5004D1BB3394D006C3AD9 /* ComplicationController.swift */; };
 		06A500501BB3394D006C3AD9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06A5004F1BB3394D006C3AD9 /* Assets.xcassets */; };
+		06A500601BB3655F006C3AD9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06A5005F1BB3655F006C3AD9 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		06A5004D1BB3394D006C3AD9 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		06A5004F1BB3394D006C3AD9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		06A500511BB3394D006C3AD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		06A5005F1BB3655F006C3AD9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 				06A5003A1BB3394D006C3AD9 /* Interface.storyboard */,
 				06A5003D1BB3394D006C3AD9 /* Assets.xcassets */,
 				06A5003F1BB3394D006C3AD9 /* Info.plist */,
+				06A5005F1BB3655F006C3AD9 /* Images.xcassets */,
 			);
 			path = "RankWatch WatchKit App";
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06A500601BB3655F006C3AD9 /* Images.xcassets in Resources */,
 				06A5003E1BB3394D006C3AD9 /* Assets.xcassets in Resources */,
 				06A5003C1BB3394D006C3AD9 /* Interface.storyboard in Resources */,
 			);

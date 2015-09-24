@@ -73,7 +73,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WCSessionDele
     
     func getNextRequestedUpdateDateWithHandler(handler: (NSDate?) -> Void) {
         // Call the handler with the date when you would next like to be given the opportunity to update your complication content
-        let minutes: NSTimeInterval = 30
+        let minutes: NSTimeInterval = 1
         let dateInOneHour = NSDate(timeInterval: 60*minutes, sinceDate: NSDate())
         handler(dateInOneHour) // in one hour
     }
@@ -215,9 +215,7 @@ class RankObject : NSObject {
         if rank == 0 {
             return nil
         }
-        if !didChange {
-            return nil
-        } else {
+        if didChange {
             NSUserDefaults.standardUserDefaults().setInteger(Int(rank), forKey: "prevRank")
             NSUserDefaults.standardUserDefaults().synchronize()
         }

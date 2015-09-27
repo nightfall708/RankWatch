@@ -47,10 +47,6 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WCSessionDele
             if data != nil && error == nil {
                 let json = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.init(rawValue: 0))
                 let rankObject = RankObject(json: json)
-                if let rank: String = rankObject?.rank, let rankInt = Int(rank) {
-                    NSUserDefaults.standardUserDefaults().setInteger(rankInt, forKey: "prevRank")
-                    NSUserDefaults.standardUserDefaults().synchronize()
-                }
                 let entry = self.timeLineEntryForComplicationWithRankObject(rankObject, family: complication.family)
                 //                let entry = CLKComplicationTimelineEntry(rankObject: rankObject, family: complication.family)
                 handler(entry)
@@ -73,7 +69,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WCSessionDele
     
     func getNextRequestedUpdateDateWithHandler(handler: (NSDate?) -> Void) {
         // Call the handler with the date when you would next like to be given the opportunity to update your complication content
-        let minutes: NSTimeInterval = 1
+        let minutes: NSTimeInterval = 30
         let dateInOneHour = NSDate(timeInterval: 60*minutes, sinceDate: NSDate())
         handler(dateInOneHour) // in one hour
     }
@@ -136,7 +132,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WCSessionDele
 extension CLKComplicationTimelineEntry {
     
     convenience init?(rankObject: RankObject?, family: CLKComplicationFamily) {
-        let stringNAString = "n/a"
+        let stringNAString = ">100"
         var template: CLKComplicationTemplate?
         if family == .CircularSmall {
             if rankObject != nil {
@@ -213,7 +209,8 @@ class RankObject : NSObject {
         
         super.init()
         if rank == 0 {
-            return nil
+            self.rank = ""
+            self.change = ">100"
         }
         if didChange {
             NSUserDefaults.standardUserDefaults().setInteger(Int(rank), forKey: "prevRank")

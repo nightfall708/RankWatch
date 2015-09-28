@@ -177,44 +177,52 @@ class RankObject : NSObject {
         var rank = 0
         let feed = json["feed"]!
         let array = feed!["entry"]!
-        var prevRank = NSUserDefaults.standardUserDefaults().integerForKey("prevRank")
+        let prevRankNumber: NSNumber? = NSUserDefaults.standardUserDefaults().objectForKey("prevRank") as! NSNumber!
         let appname = NSUserDefaults.standardUserDefaults().stringForKey("appname")
-        for (var i = 1; i <= 100; i++) {
-            let name = array![i-1]["im:name"]!
-            if (name!["label"]! as? String)?.lowercaseString == appname {
-                rank = i;
-                break
+        var rankString: String?
+        var changeString: String?
+        if appname == nil {
+            rankString = ""
+            changeString = "n/a"
+        } else {
+            for (var i = 1; i <= 100; i++) {
+                let name = array![i-1]["im:name"]!
+                if (name!["label"]! as? String)?.lowercaseString == appname {
+                    rank = i;
+                    break
+                }
+            }
+            if rank == 0 {
+                // bellow 100
+                rankString = ""
+                changeString = ">100"
+            }
+            else if prevRankNumber != nil {
+                // stay like before
+                let prevRank = prevRankNumber!.integerValue
+                if prevRank == rank {
+                    rankString = NSUserDefaults.standardUserDefaults().stringForKey("rankString")!
+                    changeString = NSUserDefaults.standardUserDefaults().stringForKey("changeString")!
+                } else {
+                    rankString = "\(rank)"
+                    let diff = prevRank - rank
+                    if diff > 0 {
+                        changeString = "(+\(diff))"
+                    } else if diff < 0 {
+                        changeString = "(\(diff))"
+                    }
+                    NSUserDefaults.standardUserDefaults().setObject(NSNumber(integer: rank), forKey: "prevRank")
+                }
+            } else {
+                rankString = "\(rank)"
+                changeString = "(-)"
+                NSUserDefaults.standardUserDefaults().setObject(NSNumber(integer: rank), forKey: "prevRank")
             }
         }
-        var didChange = true
-        if prevRank == rank {
-            didChange = false
-        }
-        // calculating difference
-        if (prevRank == 0) {
-            prevRank = rank
-        }
-        var diff_s: String? = nil
-        let diff = prevRank - rank
-        if diff > 0 {
-            diff_s = "(+\(diff))"
-        } else if diff < 0 {
-            diff_s = "(\(diff))"
-        } else {
-            diff_s = "(-)"
-        }
-        
-        self.rank = "\(rank)"
-        self.change = diff_s!
-        
-        super.init()
-        if rank == 0 {
-            self.rank = ""
-            self.change = ">100"
-        }
-        if didChange {
-            NSUserDefaults.standardUserDefaults().setInteger(Int(rank), forKey: "prevRank")
-            NSUserDefaults.standardUserDefaults().synchronize()
-        }
+        NSUserDefaults.standardUserDefaults().setObject(rankString, forKey: "rankString")
+        NSUserDefaults.standardUserDefaults().setObject(changeString, forKey: "changeString")
+        NSUserDefaults.standardUserDefaults().synchronize()
+        self.rank = rankString!
+        self.change = changeString!
     }
 }

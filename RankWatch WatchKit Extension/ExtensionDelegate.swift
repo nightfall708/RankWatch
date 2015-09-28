@@ -38,8 +38,15 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
             NSUserDefaults.standardUserDefaults().setObject(applicationContext[key], forKey: key)
             print("saved \(key) => \(value)")
         }
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("rankString")
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("changeString")
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("prevRank")
         NSUserDefaults.standardUserDefaults().synchronize()
-        CLKComplicationServer.sharedInstance().reloadTimelineForComplication(CLKComplicationServer.sharedInstance().activeComplications[0])
-        NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "contextArrived", object: nil))
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            if CLKComplicationServer.sharedInstance() != nil {
+                CLKComplicationServer.sharedInstance().reloadTimelineForComplication(CLKComplicationServer.sharedInstance().activeComplications[0])
+                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "contextArrived", object: nil))
+            }
+        }
     }
 }
